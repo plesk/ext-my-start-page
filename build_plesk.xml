@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<project name="Build package - Plesk Extension" basedir="." default="main">
+    <!-- Settings -->
+    <property name="package" value="my-start-page" override="true"/>
+    <property name="package.version" value="1.0.0" override="true"/>
+    <property name="revision.number" value="1" override="true"/>
+    <property name="storage.path" value="./archive" override="true"/>
+    <tstamp/>
+
+    <!-- Target Directory -->
+    <property name="targetdir" value="${storage.path}/${package.version}-${revision.number}/${DSTAMP}-${TSTAMP}" override="true"/>
+
+    <!-- MAIN -->
+    <target name="main" description="Creates an extension build file">
+        <!-- Cleanup build area -->
+        <delete dir="${targetdir}"/>
+        <mkdir dir="${targetdir}"/>
+        <!-- Add the main plugin -->
+        <phingcall target="build">
+            <property name="extname" value="ext-${package}_v${package.version}-${revision.number}"/>
+            <property name="build" value="1"/>
+        </phingcall>
+    </target>
+
+    <!-- BUILD -->
+    <target name="build" description="Packages the extension for delivery">
+        <!-- The following options are for picking up the right files/folders. -->
+        <if>
+            <not>
+                <isset property="extname"/>
+            </not>
+            <then>
+                <property name="extname" value=""/>
+            </then>
+        </if>
+
+        <if>
+            <equals arg1="${build}" arg2="1"/>
+            <then>
+                <delete file="${targetdir}/${extname}.zip"/>
+
+                <zip destfile="${targetdir}/${extname}.zip">
+                    <fileset dir=".">
+                        <include name="**"/>
+                        <exclude name=".*"/>
+                        <exclude name=".git/"/>
+                        <exclude name=".idea/"/>
+                        <exclude name="archive/"/>
+                        <exclude name="build_plesk.xml"/>
+                    </fileset>
+                </zip>
+            </then>
+        </if>
+
+    </target>
+
+</project>
