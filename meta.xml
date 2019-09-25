@@ -5,7 +5,7 @@
   <name>My Start Page</name>
   <description>This extension let you set a custom start page that is loaded directly after the login.</description>
   <version>1.0.0</version>
-  <release>1</release>
+  <release>{{RELEASE}}</release>
   <vendor>Plesk</vendor>
   <url>http://www.plesk.com</url>
   <plesk_min_version>17.0.16</plesk_min_version>
