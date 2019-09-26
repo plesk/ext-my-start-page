@@ -15,11 +15,22 @@ class IndexController extends pm_Controller_Action
     public function indexAction()
     {
         $form = new pm_Form_Simple();
-        $form->addElement('text', 'myStartPageLink', ['label' => $this->lmsg('formMyStartPageLink'), 'value' => pm_Settings::get('myStartPageLink'), 'style' => 'width: 40%;']);
+        $form->addElement('text', 'myStartPageLink', [
+            'label'        => $this->lmsg('formMyStartPageLink'),
+            'value'        => pm_Settings::get('myStartPageLink'),
+            'style'        => 'width: 50%;',
+            'validators'   => [
+                new Zend_Validate_Callback([
+                    'Modules_MyStartPage_Helper',
+                    'isValid',
+                ]),
+            ],
+            'autocomplete' => 'off',
+        ]);
         $form->addControlButtons(['cancelLink' => pm_Context::getModulesListUrl(),]);
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $myStartPageLink = $form->getValue('myStartPageLink') ?? '';
+            $myStartPageLink = filter_var($form->getValue('myStartPageLink') ?? '', FILTER_SANITIZE_URL);
             pm_Settings::set('myStartPageLink', $myStartPageLink);
 
             if (!empty($myStartPageLink)) {

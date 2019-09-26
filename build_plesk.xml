@@ -3,7 +3,7 @@
     <!-- Settings -->
     <property name="package" value="my-start-page" override="true"/>
     <property name="package.version" value="1.0.0" override="true"/>
-    <property name="revision.number" value="1" override="true"/>
+    <property name="revision.number" value="2" override="true"/>
     <property name="storage.path" value="./archive" override="true"/>
     <tstamp/>
 
