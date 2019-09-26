@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 1999-2019. Plesk International GmbH. All Rights Reserved. -->
 <module>
-  <id>my-start-page</id>
-  <name>My Start Page</name>
-  <description>This extension let you set a custom start page that is loaded directly after the login.</description>
-  <version>1.0.0</version>
-  <release>{{RELEASE}}</release>
-  <vendor>Plesk</vendor>
-  <url>https://www.plesk.com</url>
-  <plesk_min_version>17.0.16</plesk_min_version>
+    <id>my-start-page</id>
+    <name>My Start Page</name>
+    <description>This extension let you set a custom start page that is loaded directly after the login.</description>
+    <category>appearance</category>
+    <version>1.0.0</version>
+    <release>{{RELEASE}}</release>
+    <vendor>Plesk</vendor>
+    <url>https://www.plesk.com</url>
+    <support_url>hhttps://github.com/plesk/ext-my-start-page/issues</support_url>
+    <plesk_min_version>17.0.16</plesk_min_version>
 </module>
