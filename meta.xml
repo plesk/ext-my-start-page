@@ -7,6 +7,6 @@
   <version>1.0.0</version>
   <release>{{RELEASE}}</release>
   <vendor>Plesk</vendor>
-  <url>http://www.plesk.com</url>
+  <url>https://www.plesk.com</url>
   <plesk_min_version>17.0.16</plesk_min_version>
 </module>
