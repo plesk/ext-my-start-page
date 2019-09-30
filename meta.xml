@@ -9,6 +9,6 @@
     <release>{{RELEASE}}</release>
     <vendor>Plesk</vendor>
     <url>https://www.plesk.com</url>
-    <support_url>hhttps://github.com/plesk/ext-my-start-page/issues</support_url>
+    <support_url>https://github.com/plesk/ext-my-start-page/issues</support_url>
     <plesk_min_version>17.0.16</plesk_min_version>
 </module>
