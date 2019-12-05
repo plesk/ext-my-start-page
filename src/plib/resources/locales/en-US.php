@@ -4,6 +4,6 @@
 $messages = [
     'messageSuccess'       => 'Your custom start page link was saved successfully!',
     'pageTitle'            => 'Set your individual start page for Plesk!',
-    'pageTitleDescription' => '<p>This extension redirects you to a custom start page right after the login to the Plesk UI!</p>',
+    'pageTitleDescription' => 'This extension redirects you to a custom start page right after the login to the Plesk UI!',
     'formMyStartPageLink'  => 'Enter you custom start page link',
 ];

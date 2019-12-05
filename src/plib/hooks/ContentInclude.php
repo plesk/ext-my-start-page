@@ -1,12 +1,13 @@
 <?php
 // Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
 
+use PleskExt\MyStartPage\Helper;
+
 class Modules_MyStartPage_ContentInclude extends pm_Hook_ContentInclude
 {
     public function init()
     {
         $authUrl = pm_Context::getActionUrl('index', 'auth');
-        $requestUrl = $_SERVER['REQUEST_URI'];
 
         $excludeUrls = [
             $authUrl,
@@ -22,22 +23,29 @@ class Modules_MyStartPage_ContentInclude extends pm_Hook_ContentInclude
         ];
 
         foreach ($excludeUrls as $excludeUrl) {
-            if (0 === strncmp($requestUrl, $excludeUrl, strlen($excludeUrl))) {
+            if (0 === strncmp($_SERVER['REQUEST_URI'], $excludeUrl, strlen($excludeUrl))) {
                 return;
             }
         }
 
-        $myStartPageRedirect = $_SESSION['myStartPageRedirect'] ?? false;
+        $myStartPageRedirect = $_SESSION[Helper::SESSION_KEY] ?? false;
 
-        if (!$myStartPageRedirect) {
-            $myStartPageLink = pm_Settings::get('myStartPageLink');
+        if ($myStartPageRedirect) {
+            return;
+        }
 
-            if (!empty($myStartPageLink)) {
-                $_SESSION['myStartPageRedirect'] = true;
+        $redirectUrl = pm_Settings::get(Helper::SETTING_KEY, '');
 
-                header("Location: {$myStartPageLink}");
-                die();
-            }
+        if ($redirectUrl === '') {
+            $redirectUrl = pm_Config::get(Helper::SETTING_KEY, '');
+        }
+
+        if ($redirectUrl !== '') {
+            $_SESSION[Helper::SESSION_KEY] = true;
+
+            header('Location: ' . $redirectUrl);
+
+            exit;
         }
     }
 }

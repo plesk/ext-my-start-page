@@ -1,6 +1,8 @@
 <?php
 // Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
 
+use PleskExt\MyStartPage\Helper;
+
 class IndexController extends pm_Controller_Action
 {
     protected $_accessLevel = 'admin';
@@ -21,7 +23,7 @@ class IndexController extends pm_Controller_Action
             'style'        => 'width: 50%;',
             'validators'   => [
                 new Zend_Validate_Callback([
-                    'Modules_MyStartPage_Helper',
+                    Helper::class,
                     'isValid',
                 ]),
             ],
