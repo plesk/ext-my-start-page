@@ -1,14 +1,14 @@
 <?php
 // Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
 
-abstract class Modules_MyStartPage_Helper
+namespace PleskExt\MyStartPage;
+
+class Helper
 {
-    /**
-     * @param string $url
-     *
-     * @return bool
-     */
-    public static function isValid($url): bool
+    public const SESSION_KEY = 'myStartPageRedirect';
+    public const SETTING_KEY = 'myStartPageLink';
+
+    public static function isValid(string $url): bool
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return false;

@@ -1,0 +1,19 @@
+{
+    "name": "plesk/ext-my-start-page",
+    "autoload": {
+        "psr-4": {
+            "PleskExt\\MyStartPage\\": "modules/my-start-page/library/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PleskExt\\MyStartPage\\": "src/plib/library/"
+        }
+    },
+    "require-dev": {
+        "plesk/pm-api-stubs": "^18.0"
+    },
+    "config": {
+        "vendor-dir": "src/plib/vendor"
+    }
+}
