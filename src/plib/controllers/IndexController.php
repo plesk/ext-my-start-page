@@ -16,10 +16,16 @@ class IndexController extends pm_Controller_Action
 
     public function indexAction()
     {
+        $redirectUrl = pm_Settings::get(Helper::SETTING_KEY, '');
+
+        if ($redirectUrl === '') {
+            $redirectUrl = pm_Config::get(Helper::SETTING_KEY, '');
+        }
+
         $form = new pm_Form_Simple();
         $form->addElement('text', 'myStartPageLink', [
             'label'        => $this->lmsg('formMyStartPageLink'),
-            'value'        => pm_Settings::get('myStartPageLink'),
+            'value'        => $redirectUrl,
             'style'        => 'width: 50%;',
             'validators'   => [
                 new Zend_Validate_Callback([
