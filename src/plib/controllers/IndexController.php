@@ -14,13 +14,12 @@ class IndexController extends pm_Controller_Action
         $this->view->pageTitle = $this->lmsg('pageTitle');
     }
 
+    /**
+     * @throws Exception
+     */
     public function indexAction()
     {
-        $redirectUrl = pm_Settings::get(Helper::SETTING_KEY, '');
-
-        if ($redirectUrl === '') {
-            $redirectUrl = pm_Config::get(Helper::SETTING_KEY, '');
-        }
+        $redirectUrl = Helper::getRedirectUrl();
 
         $form = new pm_Form_Simple();
         $form->addElement('text', 'myStartPageLink', [
@@ -39,6 +38,8 @@ class IndexController extends pm_Controller_Action
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $myStartPageLink = filter_var($form->getValue('myStartPageLink') ?? '', FILTER_SANITIZE_URL);
+            $myStartPageLink = Helper::getCleanUrlPath($myStartPageLink);
+
             pm_Settings::set('myStartPageLink', $myStartPageLink);
 
             if (!empty($myStartPageLink)) {
