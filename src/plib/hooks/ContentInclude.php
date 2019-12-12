@@ -34,16 +34,11 @@ class Modules_MyStartPage_ContentInclude extends pm_Hook_ContentInclude
             return;
         }
 
-        $redirectUrl = pm_Settings::get(Helper::SETTING_KEY, '');
-
-        if ($redirectUrl === '') {
-            $redirectUrl = pm_Config::get(Helper::SETTING_KEY, '');
-        }
+        $redirectUrl = Helper::getRedirectUrl();
 
         if ($redirectUrl !== '') {
             $_SESSION[Helper::SESSION_KEY] = true;
-
-            header('Location: ' . $redirectUrl);
+            Zend_Controller_Action_HelperBroker::getStaticHelper('redirector')->gotoUrl($redirectUrl);
 
             exit;
         }
