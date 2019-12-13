@@ -23,7 +23,8 @@ class IndexController extends pm_Controller_Action
 
         $form = new pm_Form_Simple();
         $form->addElement('text', 'myStartPageLink', [
-            'label'        => $this->lmsg('formMyStartPageLink'),
+            'label'        => $this->lmsg('formMyStartPageLink', ['url' => $_SERVER['HTTP_HOST']]),
+            'description'  => $this->lmsg('formMyStartPageLinkDesc'),
             'value'        => $redirectUrl,
             'style'        => 'width: 50%;',
             'validators'   => [
