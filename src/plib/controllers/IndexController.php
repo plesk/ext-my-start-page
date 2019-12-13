@@ -34,7 +34,10 @@ class IndexController extends pm_Controller_Action
             ],
             'autocomplete' => 'off',
         ]);
-        $form->addControlButtons(['cancelLink' => pm_Context::getModulesListUrl(),]);
+        $form->addControlButtons([
+            'cancelLink' => pm_Context::getModulesListUrl(),
+            'hideLegend' => true,
+        ]);
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $myStartPageLink = filter_var($form->getValue('myStartPageLink') ?? '', FILTER_SANITIZE_URL);
