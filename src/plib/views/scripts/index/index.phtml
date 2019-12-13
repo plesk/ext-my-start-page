@@ -2,5 +2,12 @@
 // Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
 ?>
 <p><?php echo $this->outputDescription; ?></p>
+
+<?php if (!$this->isValidUrl) { ?>
+<div class="pul-alert pul-alert--warning">
+    <?= $this->invalidPanelIniUrlDescription ?>
+</div>
+<?php } ?>
+
 <br/>
 <?php echo $this->form; ?>

@@ -53,7 +53,16 @@ class IndexController extends pm_Controller_Action
             $this->_helper->json(['redirect' => pm_Context::getBaseUrl()]);
         }
 
+        $isValidUrl = true;
+        $panelIniUrl = \pm_Config::get(Helper::SETTING_KEY, '');
+
+        if ($panelIniUrl !== '') {
+            $isValidUrl = Helper::isValid($panelIniUrl);
+        }
+
         $this->view->form = $form;
         $this->view->outputDescription = $this->lmsg('pageTitleDescription');
+        $this->view->isValidUrl = $isValidUrl;
+        $this->view->invalidPanelIniUrlDescription = $this->lmsg('invalidPanelIniUrl', ['url' => $panelIniUrl]);
     }
 }
