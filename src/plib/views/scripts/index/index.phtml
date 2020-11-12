@@ -1,13 +1,13 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
+// Copyright 1999-2020. Plesk International GmbH. All Rights Reserved.
 ?>
 <p><?php echo $this->outputDescription; ?></p>
 
-<?php if (!$this->isValidUrl) { ?>
-<div class="pul-alert pul-alert--warning">
-    <?= $this->invalidPanelIniUrlDescription ?>
-</div>
-<?php } ?>
+<?php if (!$this->isValidUrl) : ?>
+    <div class="pul-alert pul-alert--warning">
+        <?php echo $this->invalidPanelIniUrlDescription; ?>
+    </div>
+<?php endif; ?>
 
 <br/>
 <?php echo $this->form; ?>
