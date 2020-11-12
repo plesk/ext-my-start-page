@@ -1,5 +1,5 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
+// Copyright 1999-2020. Plesk International GmbH. All Rights Reserved.
 
 use PleskExt\MyStartPage\Helper;
 
@@ -38,7 +38,7 @@ class Modules_MyStartPage_ContentInclude extends pm_Hook_ContentInclude
 
         if ($redirectUrl !== '') {
             $_SESSION[Helper::SESSION_KEY] = true;
-            Zend_Controller_Action_HelperBroker::getStaticHelper('redirector')->gotoUrl($redirectUrl);
+            Zend_Controller_Action_HelperBroker::getStaticHelper('redirector')->gotoUrl(Helper::addHost($redirectUrl));
 
             exit;
         }

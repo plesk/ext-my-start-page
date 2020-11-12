@@ -1,5 +1,5 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
+// Copyright 1999-2020. Plesk International GmbH. All Rights Reserved.
 
 namespace PleskExt\MyStartPage;
 
@@ -38,20 +38,48 @@ class Helper
     public static function isValid(string $url): bool
     {
         // Only internal URLs are valid
-        if (preg_match('@https?://(www\.)?@i', $url) && stripos($url, $_SERVER['HTTP_HOST']) === false) {
+        if (preg_match('@https?://(www\.)?@i', $url) && stripos($url, self::getHost()) === false) {
             return false;
         }
 
         // Prepend the host value for the filter_var validation check
-        if (stripos($url, $_SERVER['HTTP_HOST']) === false) {
-            $url = 'https://' . $_SERVER['HTTP_HOST'] . '/' . $url;
-        }
+        $url = self::addHost($url);
 
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Returns the host required for validity check and redirect without the trailing slash
+     *
+     * @return string
+     */
+    public static function getHost(): string
+    {
+        return rtrim((string) $_SERVER['HTTP_HOST'], '/');
+    }
+
+    /**
+     * Adds the host value if not set already
+     *
+     * @param string $url
+     *
+     * @return string
+     */
+    public static function addHost(string $url): string
+    {
+        if (empty($url)) {
+            return '';
+        }
+
+        if (stripos($url, self::getHost()) === false) {
+            $url = 'https://' . self::getHost() . '/' . $url;
+        }
+
+        return $url;
     }
 
     /**

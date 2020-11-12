@@ -1,5 +1,5 @@
 <?php
-// Copyright 1999-2019. Plesk International GmbH. All Rights Reserved.
+// Copyright 1999-2020. Plesk International GmbH. All Rights Reserved.
 
 use PleskExt\MyStartPage\Helper;
 
@@ -23,7 +23,7 @@ class IndexController extends pm_Controller_Action
 
         $form = new pm_Form_Simple();
         $form->addElement('text', 'myStartPageLink', [
-            'label'        => $this->lmsg('formMyStartPageLink', ['url' => $_SERVER['HTTP_HOST']]),
+            'label'        => $this->lmsg('formMyStartPageLink', ['url' => Helper::getHost()]),
             'description'  => $this->lmsg('formMyStartPageLinkDesc'),
             'value'        => $redirectUrl,
             'style'        => 'width: 50%;',
@@ -41,8 +41,12 @@ class IndexController extends pm_Controller_Action
         ]);
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $myStartPageLink = filter_var($form->getValue('myStartPageLink') ?? '', FILTER_SANITIZE_URL);
-            $myStartPageLink = Helper::getCleanUrlPath($myStartPageLink);
+            $myStartPageLink = $form->getValue('myStartPageLink') ?? '';
+
+            if (!empty($myStartPageLink)) {
+                $myStartPageLink = filter_var($myStartPageLink, FILTER_SANITIZE_URL);
+                $myStartPageLink = Helper::getCleanUrlPath($myStartPageLink);
+            }
 
             pm_Settings::set('myStartPageLink', $myStartPageLink);
 
